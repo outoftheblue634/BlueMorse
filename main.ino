@@ -3,10 +3,7 @@
 #include <Adafruit_SSD1306.h>
 #include <SoftwareSerial.h>
 
-#define TxD 10
-#define RxD 9
-
-SoftwareSerial BLE(TxD, RxD);
+SoftwareSerial BLE(10, 9);
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 32 // OLED display height, in pixels
@@ -14,9 +11,6 @@ SoftwareSerial BLE(TxD, RxD);
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
 String code = "";
-int len = 0;
-char ch;
-char new_char;
 String sentence = "";
 String package = "";
 const int but = 2;
@@ -25,7 +19,6 @@ const int led = 13;
 const int led2= 12;
 int lenght = 0;
 unsigned long pres_len = 0, rel_time, pres_time = 0, old_time_len = 0, old_pres = 0, space = 0, startPressed = 0, endPressed = 0;
-int state = 0;
 int unit_delay = 125;
 int min_delay = 5;
 
@@ -51,7 +44,7 @@ void but2State() {
     startPressed = millis();
     while (digitalRead(but2) == LOW) {}
     endPressed = millis();
-    if ((endPressed - startPressed) > 2000) {
+    if ((endPressed - startPressed) > 1000) {
       sendPackage();
     }else{  
       delay(200);
@@ -65,9 +58,8 @@ void but2State() {
 
 void sendPackage() {
    BLE.print(sentence);
-   display.clearDisplay();
-   display.setCursor(22, 0);
-   display.print(sentence);
+   ClearDisplay();
+   display.print("SENT");
    display.display();
    delay(2000);     
    sentence = "";   
@@ -140,11 +132,12 @@ void ClearDisplay() {
   display.setCursor(0, 0);
   display.display();
 }
+
 void Morse_decod()
 {
   static String morse[] = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....",
                              "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-",
-                             ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", "!"
+                             ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", "....."
                             };
 
 int i = 0;
@@ -152,6 +145,7 @@ int i = 0;
   {
     if (morse[i] == code)
     {
+      if (i == 26) {i = -33;} //Spaces = ASCII 32
       ClearDisplay();
       sentence += (char('A' + i));
       display.print(sentence);
