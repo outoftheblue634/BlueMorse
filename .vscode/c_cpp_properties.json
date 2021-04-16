@@ -17,7 +17,6 @@
             "includePath": [
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\eightanaloginputs",
-                "C:\\Users\\splav\\Documents\\Arduino\\libraries\\SerialTransfer\\src",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\libraries\\Wire\\src",
                 "C:\\Users\\splav\\Documents\\Arduino\\libraries\\Adafruit_GFX_Library",
                 "C:\\Users\\splav\\Documents\\Arduino\\libraries\\Adafruit_SSD1306",
