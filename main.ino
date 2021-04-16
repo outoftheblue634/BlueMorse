@@ -61,7 +61,6 @@ void but2State() {
 String shiftTextOver(){
   holding_sentence = sentence.substring(current);
   current += 1;
-  Serial.print(current);
   return holding_sentence;
 
 
