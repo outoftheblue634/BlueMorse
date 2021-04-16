@@ -25,6 +25,7 @@ int current = 0;
 int row[] = { 8, 16, 24};
 int char_counter = 0;
 int cycle = 0;
+int num_char = 5;
 
 void setup() {
   Serial.begin(9600);
@@ -85,11 +86,11 @@ void receivePackage(){
       receivePackage();
     }else{
     ClearDisplay();
-    if(char_counter  > 17){
-        cycle = (char_counter/17); 
-        for(int i= 0; i != cycle; i++){
+    if(char_counter  > num_char){
+        cycle = (char_counter/num_char); 
+        for(int i = 0; i != cycle; i++){
           display.setCursor(0, row[i]);
-          display.print(package.substring(cycle*17, 17+(cycle*17)));
+          display.print(package.substring(i*num_char, num_char+(i*num_char)));
         }
         display.display();
         cycle = 0;
