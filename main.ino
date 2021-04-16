@@ -2,7 +2,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <SoftwareSerial.h>
-// test branch comment 
+// test branch comment
 SoftwareSerial BLE(10, 9);
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
