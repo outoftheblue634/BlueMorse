@@ -1,4 +1,4 @@
-#include <Wire.h>
+#include <Wire.h> //wired
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <SoftwareSerial.h>
