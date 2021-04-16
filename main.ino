@@ -66,8 +66,8 @@ void but2State() {
 void sendPackage() {
    BLE.print(sentence);
    display.clearDisplay();
-   display.setCursor(22, 0);
-   display.print(sentence);
+   display.setCursor(0, 0);
+   display.print("SENT");
    display.display();
    delay(2000);     
    sentence = "";   
@@ -84,6 +84,7 @@ void receivePackage(){
     display.print(package);
     display.display();
     delay(2000);
+    package = "";
     ClearDisplay();
     }
 }
