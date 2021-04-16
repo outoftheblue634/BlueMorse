@@ -100,6 +100,7 @@ void receivePackage(){
     delay(2000);
     ClearDisplay();
     }
+package = "";
 }
 
 
