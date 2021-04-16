@@ -1,8 +1,8 @@
-#include <Wire.h> //wired
+#include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <SoftwareSerial.h>
-//comment 4
+
 #define TxD 10
 #define RxD 9
 
@@ -19,7 +19,7 @@ char ch;
 char new_char;
 String sentence = "";
 String package = "";
-//Comment 1
+
 const int but = 2;
 const int but2 = 3;
 const int led = 13;
