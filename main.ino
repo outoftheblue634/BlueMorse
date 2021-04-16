@@ -19,7 +19,7 @@ char ch;
 char new_char;
 String sentence = "";
 String package = "";
-// oui Nique ta race
+// non f u
 const int but = 2;
 const int but2 = 3;
 const int led = 13;
