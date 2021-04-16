@@ -22,8 +22,9 @@ unsigned long pres_len = 0, rel_time, pres_time = 0, old_time_len = 0, old_pres 
 int unit_delay = 125;
 int min_delay = 5;
 int current = 0;
-
-
+int row[] = { 8, 16, 24};
+int char_counter = 0;
+int cycle = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -78,11 +79,17 @@ void sendPackage() {
 }
 
 void receivePackage(){
+    char_counter += 1;
     package = package + char(BLE.read());
     if(BLE.available()){
       receivePackage();
     }else{
     ClearDisplay();
+    if(cycle = (char_counter/17 == 1 || 2 || 3)){
+      for(int i= 0; i != cycle; i++){
+        display.print(package.substring(cycle*17, 17+(cycle*17)));
+      }
+    }
     display.print(package);
     display.display();
     delay(2000);
