@@ -33,11 +33,7 @@ void setup() {
   pinMode(but, INPUT_PULLUP);
   pinMode(but2, INPUT_PULLUP);
   pinMode(led, OUTPUT);
-
-  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Address 0x3D for 128x64
-    for(;;);
-  }
-  delay(2000);
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C); // Address 0x3D for 128x64
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
@@ -51,7 +47,7 @@ void but2State() {
     if ((endPressed - startPressed) > 1000) {
       sendPackage();
     }else{  
-      delay(200);
+      delay(100);
       lenght = sentence.length();
       sentence.remove(lenght - 1);
       ClearDisplay();
@@ -63,9 +59,8 @@ String shiftTextOver(){
   holding_sentence = sentence.substring(current);
   current += 1;
   return holding_sentence;
-
-
 }
+
 void sendPackage() {
    BLE.print(sentence);
    ClearDisplay();
@@ -84,28 +79,19 @@ void receivePackage(){
     package = package + char(BLE.read());
     if(BLE.available()){
       receivePackage();
-    }else{
-    ClearDisplay();
-    if(char_counter  > num_char){
-        cycle = (char_counter/num_char); 
-        for(int i = 0; i == cycle; i++){
-          display.setCursor(0, row[i]);
-          display.print(package.substring(i*num_char, num_char+(i*num_char)));
-          display.display();
-        }
-        cycle = 0;
-      }
-    else {
-    display.setCursor(0, 8);
-    display.print(package);
+    }
+    cycle = round((char_counter/num_char) + 0.5); 
+    for(int i = 0; i != cycle; i++){
+      display.setCursor(0, row[i]);
+      display.print(package.substring(i*num_char, num_char+(i*num_char)));
+    }
     display.display();
     delay(2000);
+    cycle = 0;
+    package = "";
+    char_counter = 0;
     ClearDisplay();
-    }
-  }
-package = "";
 }
-
 
 char MakeString() {
   if (pres_len < (unit_delay*3) && pres_len > 25)
@@ -124,9 +110,7 @@ label:
   {
     if(BLE.available()){
       receivePackage();
-      char_counter = 0;
     }
-    
     if (digitalRead(but2) == LOW) 
     {
       but2State();
