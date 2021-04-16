@@ -12,6 +12,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
 String code = "";
 String sentence = "";
+String holding_sentence = "";
 String package = "";
 const int but = 2;
 const int but2 = 3;
@@ -21,6 +22,8 @@ int lenght = 0;
 unsigned long pres_len = 0, rel_time, pres_time = 0, old_time_len = 0, old_pres = 0, space = 0, startPressed = 0, endPressed = 0;
 int unit_delay = 125;
 int min_delay = 5;
+int current = 0;
+
 
 
 void setup() {
@@ -55,14 +58,23 @@ void but2State() {
       display.display();
       }   
   }
+String shiftTextOver(){
+  holding_sentence = sentence.substring(current);
+  current += 1;
+  Serial.print(current);
+  return holding_sentence;
 
+
+}
 void sendPackage() {
    BLE.print(sentence);
    ClearDisplay();
    display.print("SENT");
    display.display();
    delay(2000);     
-   sentence = "";   
+   sentence = "";  
+   holding_sentence = ""; 
+   current = 0;
    display.clearDisplay();
    display.display();   
 }
@@ -127,6 +139,7 @@ label:
 
   Morse_decod();
 }
+
 void ClearDisplay() {
   display.clearDisplay();
   display.setCursor(0, 0);
@@ -146,11 +159,20 @@ int i = 0;
     if (morse[i] == code)
     {
       if (i == 26) {i = -33;} //Spaces = ASCII 32
+      if (sentence.length() > 17){
+        ClearDisplay();
+        sentence += (char('A' + i));
+        display.print(shiftTextOver());
+        display.display();
+        break;
+      }
+      else{
       ClearDisplay();
       sentence += (char('A' + i));
       display.print(sentence);
       display.display();
       break;
+      }
     }
     i++;
   }
