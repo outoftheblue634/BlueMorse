@@ -86,9 +86,9 @@ void receivePackage(){
     }else{
     ClearDisplay();
     if(char_counter  > 17){
-        cycle = (char_counter/17 == 1 || 2 || 3); 
+        cycle = (char_counter/17); 
         for(int i= 0; i != cycle; i++){
-          display.setcursor(0, row[cycle])
+          display.setCursor(0, row[i]);
           display.print(package.substring(cycle*17, 17+(cycle*17)));
         }
         display.display();
