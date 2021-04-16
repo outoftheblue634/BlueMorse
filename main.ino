@@ -91,11 +91,12 @@ void receivePackage(){
         for(int i = 0; i == cycle; i++){
           display.setCursor(0, row[i]);
           display.print(package.substring(i*num_char, num_char+(i*num_char)));
-          display.display()
+          display.display();
         }
         cycle = 0;
       }
     else {
+    display.setCursor(0, 8);
     display.print(package);
     display.display();
     delay(2000);
