@@ -54,7 +54,7 @@ void but2State() {
     endPressed = millis();
     if ((endPressed - startPressed) > 2000) {
       sendPackage();
-    }else{  //remove caracter
+    }else{  
       delay(200);
       lenght = sentence.length();
       sentence.remove(lenght - 1);
