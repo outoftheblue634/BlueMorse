@@ -19,17 +19,21 @@ char ch;
 char new_char;
 String sentence = "";
 String package = "";
-
+//Comment 1
 const int but = 2;
 const int but2 = 3;
 const int led = 13;
 const int led2= 12;
 int lenght = 0;
-unsigned long pres_len = 0, rel_time, pres_time = 0, old_time_len = 0, old_pres = 0, space = 0, startPressed = 0, endPressed = 0, mid_but2_time = 0 ;
+unsigned long pres_len = 0, rel_time, pres_time = 0, old_time_len = 0, old_pres = 0, space = 0, startPressed = 0, endPressed = 0;
 int state = 0;
 int unit_delay = 125;
 int min_delay = 5;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fe3c5ba0fb1dad48ad35d45963e5e7ce0a52d1ca
 void setup() {
   Serial.begin(9600);
   BLE.begin(9600);
@@ -66,8 +70,8 @@ void but2State() {
 void sendPackage() {
    BLE.print(sentence);
    display.clearDisplay();
-   display.setCursor(0, 0);
-   display.print("SENT");
+   display.setCursor(22, 0);
+   display.print(sentence);
    display.display();
    delay(2000);     
    sentence = "";   
@@ -84,7 +88,6 @@ void receivePackage(){
     display.print(package);
     display.display();
     delay(2000);
-    package = "";
     ClearDisplay();
     }
 }
