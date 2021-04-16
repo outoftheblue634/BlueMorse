@@ -91,6 +91,7 @@ void receivePackage(){
     package = "";
     char_counter = 0;
     ClearDisplay();
+    Serial.print("cleared");
 }
 
 char MakeString() {
@@ -110,6 +111,7 @@ label:
   {
     if(BLE.available()){
       receivePackage();
+      Serial.print("ok");
     }
     if (digitalRead(but2) == LOW) 
     {
