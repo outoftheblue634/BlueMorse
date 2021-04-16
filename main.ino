@@ -1,4 +1,4 @@
-#include <Wire.h>
+#include <Wire.h> //wired
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <SoftwareSerial.h>
@@ -30,10 +30,7 @@ int state = 0;
 int unit_delay = 125;
 int min_delay = 5;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> fe3c5ba0fb1dad48ad35d45963e5e7ce0a52d1ca
 void setup() {
   Serial.begin(9600);
   BLE.begin(9600);
