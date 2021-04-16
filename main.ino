@@ -85,11 +85,15 @@ void receivePackage(){
       receivePackage();
     }else{
     ClearDisplay();
-    if(cycle = (char_counter/17 == 1 || 2 || 3)){
-      for(int i= 0; i != cycle; i++){
-        display.print(package.substring(cycle*17, 17+(cycle*17)));
+    if(char_counter  > 17){
+        cycle = (char_counter/17 == 1 || 2 || 3); 
+        for(int i= 0; i != cycle; i++){
+          display.print(package.substring(cycle*17, 17+(cycle*17)));
+        }
+        display.display();
+        cycle = 0;
       }
-    }
+    
     display.print(package);
     display.display();
     delay(2000);
@@ -115,6 +119,7 @@ label:
   {
     if(BLE.available()){
       receivePackage();
+      char_counter = 0;
     }
     
     if (digitalRead(but2) == LOW) 
