@@ -1,4 +1,3 @@
-#include <SerialTransfer.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -20,6 +19,7 @@ char ch;
 char new_char;
 String sentence = "";
 String package = "";
+String oui = 'oui';
 
 const int but = 2;
 const int but2 = 3;
