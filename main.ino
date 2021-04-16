@@ -19,7 +19,6 @@ char ch;
 char new_char;
 String sentence = "";
 String package = "";
-String oui = 'oui';
 
 const int but = 2;
 const int but2 = 3;
