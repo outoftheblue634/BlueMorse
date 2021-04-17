@@ -25,7 +25,7 @@ int current = 0;
 int row[] = { 8, 16, 24};
 int char_counter = 0;
 int cycle = 0;
-int num_char = 5;
+int num_char = 15;
 
 void setup() {
   Serial.begin(9600);
@@ -75,23 +75,21 @@ void sendPackage() {
 }
 
 void receivePackage(){
+  while(BLE.available()){
     char_counter += 1;
     package = package + char(BLE.read());
-    if(BLE.available()){
-      receivePackage();
-    }
-    cycle = round((char_counter/num_char) + 0.5); 
-    for(int i = 0; i != cycle; i++){
-      display.setCursor(0, row[i]);
-      display.print(package.substring(i*num_char, num_char+(i*num_char)));
-    }
-    display.display();
-    delay(2000);
-    cycle = 0;
-    package = "";
-    char_counter = 0;
-    ClearDisplay();
-    Serial.print("cleared");
+  }
+  cycle = round((char_counter/num_char) + 0.5); 
+  for(int i = 0; i != cycle; i++){
+    display.setCursor(0, row[i]);
+    display.print(package.substring(i*num_char, num_char+(i*num_char)));
+  }
+  display.display();
+  delay(2000);
+  cycle = 0;
+  package = "";
+  char_counter = 0;
+  ClearDisplay();
 }
 
 char MakeString() {
@@ -111,7 +109,6 @@ label:
   {
     if(BLE.available()){
       receivePackage();
-      Serial.print("ok");
     }
     if (digitalRead(but2) == LOW) 
     {
