@@ -123,7 +123,11 @@ label:
   {
     if(BLE.available()){
       receivePackage();
+<<<<<<< HEAD
       char_counter = 0;
+=======
+      Serial.print("ok");
+>>>>>>> parent of 4ead271 (Oui oui baguette, fix it boss.)
     }
     
     if (digitalRead(but2) == LOW) 
