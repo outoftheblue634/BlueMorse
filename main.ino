@@ -80,7 +80,6 @@ void sendPackage() {
 }
 
 void receivePackage(){
-  while(BLE.available()){
     char_counter += 1;
     package = package + char(BLE.read());
     if(BLE.available()){
@@ -92,7 +91,7 @@ void receivePackage(){
         for(int i = 0; i == cycle; i++){
           display.setCursor(0, row[i]);
           display.print(package.substring(i*num_char, num_char+(i*num_char)));
-          display.display()
+          display.display();
         }
         cycle = 0;
       }
